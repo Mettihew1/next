@@ -7,6 +7,7 @@ async function getProducts() {
 
 export default async function Home() {
   const products = await getProducts();
+  
 
   return (
     <main>
@@ -16,12 +17,7 @@ export default async function Home() {
           <li key={product._id}>
             <strong>{product.name}</strong> ({product.slug}): {product.detail}
             {product.images?.[0]?.url && (
-              <Image
-                src={product.images[0].url}
-                alt={product.images[0].alt || product.name || "Product image"}
-                width={200}
-                height={200}
-              />
+              <Image src={product.images[0].url} alt={product.images[0].alt || product.name || "Product image"} width={200} height={200}/>
             )}
           </li>
         ))}
