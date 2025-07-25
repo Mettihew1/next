@@ -1,9 +1,15 @@
-// next.config.js
-/** @type {import('next').NextConfig} */
+// next.config.ts
+
 const nextConfig = {
   images: {
-    domains: ['m.media-amazon.com'], // e.g., 'cdn.example.com'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'm.media-amazon.com',
+      },
+    ],
   },
+  matcher: ['/((?!_next|api|favicon.ico).*)'],
 };
 
-module.exports = nextConfig;
+export default nextConfig;

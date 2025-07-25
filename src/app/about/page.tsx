@@ -1,18 +1,78 @@
-'use client';
-import { useCounterStore } from '@/store/useCounterStore';
+import { redirect } from 'next/navigation';
 
 export default function AboutPage() {
-  const { count, increase, decrease, reset } = useCounterStore();
+  if (process.env.NODE_ENV === 'production') {
+    // Redirect to your subdomain on live site
+    redirect('https://me.eesy.ir');
+  }
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us - Your Company Name',
+  description: 'Learn about our mission, values, and the team behind our success',
+};
+
+export default function AboutPage() {
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold">🔥 Zustand Counter</h1>
-      <p className="text-xl mt-4">Count: {count}</p>
-      <div className="mt-4 flex gap-2">
-        <button onClick={increase} className="px-4 py-2 bg-green-500 text-white rounded">+ Increase</button>
-        <button onClick={decrease} className="px-4 py-2 bg-red-500 text-white rounded">– Decrease</button>
-        <button onClick={reset} className="px-4 py-2 bg-gray-500 text-white rounded">Reset</button>
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">About Our Company</h1>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          We're dedicated to creating innovative solutions that make a difference
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-16 mb-20">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Our Journey</h2>
+          <div className="space-y-4 text-gray-600">
+            <p>
+              Starting from a small garage in 2015, we've grown into a team of 50+ professionals
+              serving clients across 15 countries.
+            </p>
+            <p>
+              Our focus has always been on quality over quantity, building lasting relationships
+              with our clients.
+            </p>
+          </div>
+        </div>
+        
+        <div className="bg-gray-100 rounded-lg h-64">
+          {/* Placeholder for company image */}
+        </div>
+      </div>
+
+      <div className="mb-20">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Core Values</h2>
+        <div className="grid sm:grid-cols-3 gap-8">
+          {values.map((value) => (
+            <div key={value.title} className="text-center p-6 bg-white rounded-lg shadow-sm">
+              <div className="text-3xl mb-4">{value.emoji}</div>
+              <h3 className="text-xl font-medium mb-2">{value.title}</h3>
+              <p className="text-gray-600">{value.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   );
 }
+
+const values = [
+  {
+    title: 'Innovation',
+    emoji: '💡',
+    description: 'We constantly push boundaries to deliver cutting-edge solutions'
+  },
+  {
+    title: 'Integrity',
+    emoji: '🤝',
+    description: 'Honest and transparent in all our dealings'
+  },
+  {
+    title: 'Excellence',
+    emoji: '🏆',
+    description: 'Committed to the highest standards in everything we do'
+  }
+];

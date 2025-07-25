@@ -1,5 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
+import Header from '@/components/Header';
 
 export const metadata = {
   title: "Dev News App",
@@ -17,6 +18,7 @@ export default function RootLayout({
           <Link href="/" className="text-white-600 font-bold hover:underline">Home</Link>
           <Link href="/about" className="text-yellow-600 font-bold hover:underline">About</Link>
         </header>
+                <Header />
         <main className="max-w-2xl mx-auto p-6">{children}</main>
       </body>
     </html>
