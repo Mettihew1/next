@@ -1,17 +1,28 @@
-import { redirect } from 'next/navigation';
-
-export default function AboutPage() {
-  if (process.env.NODE_ENV === 'production') {
-    // Redirect to your subdomain on live site
-    redirect('https://me.eesy.ir');
-  }
-
+// app/about/page.tsx (or wherever you place your route)
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Us - Your Company Name',
   description: 'Learn about our mission, values, and the team behind our success',
 };
+
+const values = [
+  {
+    title: 'Innovation',
+    emoji: '💡',
+    description: 'We constantly push boundaries to deliver cutting-edge solutions',
+  },
+  {
+    title: 'Integrity',
+    emoji: '🤝',
+    description: 'Honest and transparent in all our dealings',
+  },
+  {
+    title: 'Excellence',
+    emoji: '🏆',
+    description: 'Committed to the highest standards in everything we do',
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -37,7 +48,6 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-        
         <div className="bg-gray-100 rounded-lg h-64">
           {/* Placeholder for company image */}
         </div>
@@ -58,21 +68,3 @@ export default function AboutPage() {
     </main>
   );
 }
-
-const values = [
-  {
-    title: 'Innovation',
-    emoji: '💡',
-    description: 'We constantly push boundaries to deliver cutting-edge solutions'
-  },
-  {
-    title: 'Integrity',
-    emoji: '🤝',
-    description: 'Honest and transparent in all our dealings'
-  },
-  {
-    title: 'Excellence',
-    emoji: '🏆',
-    description: 'Committed to the highest standards in everything we do'
-  }
-];
