@@ -43,7 +43,7 @@ export default function AboutPage() {
               serving clients across 15 countries.
             </p>
             <p>
-              Our focus has always been on quality over quantity, building lasting relationships
+              Our focus has yes always been on quality over quantity, building lasting relationships
               with our clients.
             </p>
           </div>

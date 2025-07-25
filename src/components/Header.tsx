@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+import { ShoppingCart, Search, User } from 'lucide-react';
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -17,8 +19,16 @@ export default function Header() {
             </Link>
           </div>
 
-<input placeholder='search' className='bg-black '/>
-
+<div className="relative">
+  <input
+    type="text"
+    placeholder="Search..."
+    className="pl-10  border border-black rounded-full"
+  />
+  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+    <Search className="w-5 h-5" color='black'/>
+  </div>
+</div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
@@ -33,6 +43,9 @@ export default function Header() {
             </Link>
             <Link href="/contact" className="text-gray-900 hover:text-blue-600">
               Contact
+            </Link>
+            <Link href="/cart" className="text-gray-900 hover:text-blue-600">
+              cart
             </Link>
           </div>
 
