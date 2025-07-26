@@ -22,7 +22,6 @@ export default function Header() {
 <div className="relative">
   <input
     type="text"
-    placeholder="Search..."
     className="pl-10 border border-black rounded-full"
   />
   <div className="absolute left-1 top-1/2 -translate-y-1/2 text-gray-400">
@@ -65,7 +64,7 @@ export default function Header() {
         {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden pb-4">
-            <div className="flex flex-col space-y-2">
+            <div className="flex space-y-2">
               <Link href="/" className="text-gray-900 hover:text-blue-600">
                 Home
               </Link>
