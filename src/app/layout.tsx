@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 export const metadata = {
   title: "Dev News App",
   icons: {
-    icon: "/favi.ico?v=2"
+    icon: "/favi.ico"
   },
 };
 
@@ -18,9 +18,7 @@ export default function RootLayout({
 
   
   return (
-    // <html lang="en">
-      <html lang="en" className="dark">
-
+    <html lang="en">
       <body className="bg-gray-100 text-gray-900">
         <Header />
         <main className="max-w-2xl mx-auto p-6">{children}</main>
