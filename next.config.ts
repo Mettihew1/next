@@ -9,7 +9,6 @@ const nextConfig = {
       },
     ],
   },
-  matcher: ['/((?!_next|api|favicon.ico).*)'],
 };
 
 export default nextConfig;

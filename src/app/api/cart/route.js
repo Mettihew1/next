@@ -30,7 +30,7 @@ export async function GET() {
     return Response.json(cart)
   } catch (error) {
     return Response.json(
-      { error: 'Failed to fetch cart' },
+      { error: 'Failed to fetch cart', error },
       { status: 500 }
     )
   }

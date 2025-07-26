@@ -10,7 +10,7 @@ export async function GET() {
     const products = await Product.find();
     return NextResponse.json(products);
   } catch (error) {
-    return NextResponse.json({ message: 'Failed to fetch products' }, { status: 500 });
+    return NextResponse.json({ message: 'Failed to fetch products', error }, { status: 500 });
   }
 }
 
@@ -23,6 +23,6 @@ export async function POST(request: Request) {
     const newProduct = await Product.create(body);
     return NextResponse.json(newProduct, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: 'Failed to create product' }, { status: 400 });
+    return NextResponse.json({ message: 'Failed to create product', error }, { status: 400 });
   }
 }
