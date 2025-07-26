@@ -2,6 +2,16 @@ export const dynamic = 'force-dynamic';
 
 import ProductCard from '@/components/ProductCard';
 
+type ProductType = {
+  _id: string;
+  name: string;
+  slug: string;
+  price: number;
+  category: string;
+  image?: string;
+};
+
+
 async function getProducts() {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -25,7 +35,7 @@ export default async function Home() {
       <h1 className="text-2xl font-bold mb-6">Products</h1>
 
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.map((product: any) => (
+        {products.map((product: ProductType) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </ul>
