@@ -20,7 +20,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const [liked, setLiked] = useState(false);
 
   return (
-    <li className="border rounded-lg p-4 hover:shadow-md transition-shadow relative">
+    <li className="border rounded-lg hover:shadow-md transition-shadow relative">
 
       <button
         onClick={() => setLiked(!liked)}
@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
 
 
-      <div className="mb-4">
+      <div>
         {product.images?.[0]?.url && (
           <div className="relative aspect-square">
             <Link href={`/product/${product._id}`}>
@@ -49,10 +49,11 @@ export default function ProductCard({ product }: { product: Product }) {
 
 
 
-
+<div className='px-1'>
       <h2 className="text-lg font-semibold">{product.name}</h2>
       <p className="text-gray-600 text-sm mb-2">{product.slug}</p>
       <p className="text-gray-800">{product.detail}</p>
+</div>
 
     </li>
   );

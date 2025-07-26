@@ -29,11 +29,10 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <main className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
-      <div className="text-center mb-16">
+    <main className="max-w-7xl mx-auto sm:px-6 lg:px-12 py-4">
+      <div className="mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Hi</h1>
-        <p>Hope you&apos;re having a good one 🔥</p>
-        <p>My name is Mettihew.</p>
+        <p>Hope you&apos;re having a good one 🔥 My name is Mettihew.</p>
         <p>I code with React, Next.js, MongoDB, TypeScript — and friends. Building fast stuff for the web. 😉</p>
       </div>
 
@@ -54,9 +53,6 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-        <div className="bg-gray-100 rounded-lg h-64">
-          {/* Placeholder for profile image or illustration */}
-        </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-16 mb-20">
@@ -72,11 +68,11 @@ export default function AboutPage() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">My Works</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">Updates</h2>
         <div className="grid sm:grid-cols-3 gap-4">
           {values.map((value) => (
             <div key={value.title} className="text-center bg-white rounded-lg shadow-sm p-4">
-              <div className="text-3xl mb-2">{value.emoji}</div>
+              <div className="text-2xl">{value.emoji}</div>
               <h3 className="text-xl font-medium mb-1">{value.title}</h3>
               <p className="text-gray-600 text-sm">{value.description}</p>
               <p className="text-gray-500 text-xs">{value.timestamp}</p>
