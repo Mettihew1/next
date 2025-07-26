@@ -30,7 +30,7 @@ export default function AboutPage() {
       <div className="text-center mb-16">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">About Our Company</h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          We're dedicated to creating innovative solutions that make a difference
+          Were dedicated to creating innovative solutions that make a difference
         </p>
       </div>
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Our Journey</h2>
           <div className="space-y-4 text-gray-600">
             <p>
-              Starting from a small garage in 2015, we've grown into a team of 50+ professionals
+              Starting from a small garage in 2015, wee grown into a team of 50+ professionals
               serving clients across 15 countries.
             </p>
             <p>

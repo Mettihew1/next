@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { ShoppingCart, Search, User } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
