@@ -23,9 +23,9 @@ export default function Header() {
   <input
     type="text"
     placeholder="Search..."
-    className="pl-10  border border-black rounded-full"
+    className="pl-10 border border-black rounded-full"
   />
-  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+  <div className="absolute left-1 top-1/2 -translate-y-1/2 text-gray-400">
     <Search className="w-5 h-5" color='black'/>
   </div>
 </div>
