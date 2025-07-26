@@ -37,7 +37,7 @@ type PageProps = {
 };
 
 export default async function ProductPage({ params }: PageProps) {
-  const { id } = await params;
+  const { id } =  params;
 
   if (!id || typeof id !== 'string') {
     return notFound();
