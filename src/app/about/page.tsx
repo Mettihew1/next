@@ -1,66 +1,85 @@
-// app/about/page.tsx (or wherever you place your route)
+// app/about/page.tsx
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About Us - Your Company Name',
-  description: 'Learn about our mission, values, and the team behind our success',
+  title: 'About Me - Mettihew',
+  description: 'Get to know the dev behind eesy.ir – Mettihew’s journey, skills, and contact info.',
 };
 
 const values = [
   {
-    title: 'Innovation',
-    emoji: '💡',
-    description: 'We constantly push boundaries to deliver cutting-edge solutions',
-  },
-  {
-    title: 'Integrity',
+    title: 'Github Collaboration',
     emoji: '🤝',
-    description: 'Honest and transparent in all our dealings',
+    description: 'Ali24 updated the cart page',
+    timestamp: 'Feb 2025',
   },
   {
-    title: 'Excellence',
-    emoji: '🏆',
-    description: 'Committed to the highest standards in everything we do',
+    title: 'Zustand',
+    emoji: '💻',
+    description: 'I started to work with Zustand',
+    timestamp: 'Jan 2025',
+  },
+  {
+    title: 'Next.js | TypeScript',
+    emoji: '💻',
+    description: 'I started building eesy.ir with Next.js & TypeScript',
+    timestamp: 'Jan 2025',
   },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main className="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">About Our Company</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Were dedicated to creating innovative solutions that make a difference
-        </p>
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Hi</h1>
+        <p>Hope you&apos;re having a good one 🔥</p>
+        <p>My name is Mettihew.</p>
+        <p>I code with React, Next.js, MongoDB, TypeScript — and friends. Building fast stuff for the web. 😉</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-16 mb-20">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Our Journey</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">My Journey</h2>
           <div className="space-y-4 text-gray-600">
             <p>
-              Starting from a small garage in 2015, wee grown into a team of 50+ professionals
-              serving clients across 15 countries.
+              I started in 2022 with a small project. Step by step, I picked up HTML, CSS, JavaScript, React, Node.js,
+              Express, MongoDB, Next.js, TypeScript, Redux, Zustand — you name it.
             </p>
             <p>
-              Our focus has yes always been on quality over quantity, building lasting relationships
-              with our clients.
+              My site <code>eesy.ir</code> is built with Next.js, TypeScript, and MongoDB. It&apos;s a modern version of my original
+              app, which I first built using React and Node.js. (GitHub link coming soon!)
+            </p>
+            <p>
+              I focus on quality over quantity — and I enjoy building real things that people actually use.
             </p>
           </div>
         </div>
         <div className="bg-gray-100 rounded-lg h-64">
-          {/* Placeholder for company image */}
+          {/* Placeholder for profile image or illustration */}
         </div>
       </div>
 
-      <div className="mb-20">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Core Values</h2>
-        <div className="grid sm:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 gap-16 mb-20">
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Contact</h2>
+          <div className="grid space-y-4 text-gray-600">
+            <p>You can reach out to me here:</p>
+            <a href="#" className="text-blue-600 hover:underline">GitHub (coming soon)</a>
+            <a href="#" className="text-blue-600 hover:underline">Email (coming soon)</a>
+            <a href="#" className="text-blue-600 hover:underline">LinkedIn (coming soon)</a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">My Works</h2>
+        <div className="grid sm:grid-cols-3 gap-4">
           {values.map((value) => (
-            <div key={value.title} className="text-center p-6 bg-white rounded-lg shadow-sm">
-              <div className="text-3xl mb-4">{value.emoji}</div>
-              <h3 className="text-xl font-medium mb-2">{value.title}</h3>
-              <p className="text-gray-600">{value.description}</p>
+            <div key={value.title} className="text-center bg-white rounded-lg shadow-sm p-4">
+              <div className="text-3xl mb-2">{value.emoji}</div>
+              <h3 className="text-xl font-medium mb-1">{value.title}</h3>
+              <p className="text-gray-600 text-sm">{value.description}</p>
+              <p className="text-gray-500 text-xs">{value.timestamp}</p>
             </div>
           ))}
         </div>
