@@ -6,6 +6,11 @@ import { Menu } from "lucide-react";
 
 import { Search } from 'lucide-react';
 
+const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+  ev.preventDefault()
+  alert('yeay')
+}
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,6 +26,8 @@ export default function Header() {
           </div>
 
 <div className="relative">
+  <form onSubmit={(ev) => handleSubmit(ev)}>
+
   <input type="text" className="pl-10 border border-black rounded-full"/>
 
   <div className="absolute left-1 top-1/2 -translate-y-1/2 text-gray-400">
@@ -29,6 +36,7 @@ export default function Header() {
 
   <select className="absolute right-1 top-1/8"><option>All</option></select>
 
+  </form>
 </div>
 
           {/* Desktop Navigation */}
