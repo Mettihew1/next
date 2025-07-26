@@ -11,20 +11,17 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-sm top-0 z-10">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-7xl mx-auto px- sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900">
+            <Link href="/" className="text-xl font-bold text-gray-900 mx-1">
               Eesy
             </Link>
           </div>
 
 <div className="relative">
-  <input
-    type="text"
-    className="pl-10 border border-black rounded-full"
-  />
+  <input type="text" className="pl-10 border border-black rounded-full"/>
 
   <div className="absolute left-1 top-1/2 -translate-y-1/2 text-gray-400">
     <Search className="w-5 h-5" color='black'/>
@@ -57,9 +54,9 @@ export default function Header() {
           <div className="md:hidden">
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-900"
+              className="text-gray-900 px-1"
             >
-            <Menu className="h-6 w-6 "  /> {/* Adjust size as needed */}
+            <Menu className="h-6 w-6 mt-[8px]"  /> 
             </button>
           </div>
         </div>

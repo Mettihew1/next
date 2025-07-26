@@ -31,11 +31,11 @@ export default async function Home() {
   const products = await getProducts();
 
   return (
-    <main className="container mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Products</h1>
+    // <main className="container mx-auto">
+      <main className="px-2 sm:px-4 md:px-8 max-w-screen-xl mx-auto">
+      <h1 className="text-2xl font-bold mb-3">Products</h1>
 
-{/* <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"> */}
-  <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  <ul className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2">
      {products.map((product: ProductType) => (
           <ProductCard key={product._id} product={product} />
         ))}

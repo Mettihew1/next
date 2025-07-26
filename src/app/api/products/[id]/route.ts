@@ -1,3 +1,16 @@
+
+
+
+
+// src/app/api/products/[id]/route.ts
+
+export function GET() {
+  return new Response('Not implemented yet', { status: 501 });
+}
+
+
+
+
 // import { NextResponse } from 'next/server';
 // import dbConnect from '@/lib/mongodb';
 // import Product from '@/models/Product';
