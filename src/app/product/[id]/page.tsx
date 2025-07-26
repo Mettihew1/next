@@ -33,9 +33,10 @@ async function getProduct(id: string): Promise<Product | null> {
 }
 
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const { id } =  params;
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
 
+  
   if (!id || typeof id !== 'string') {
     return notFound();
   }
