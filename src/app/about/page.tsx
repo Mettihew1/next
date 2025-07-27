@@ -16,7 +16,7 @@ const values = [
   {
     title: 'Zustand',
     emoji: '💻',
-    description: 'I started to work with Zustand',
+    description: 'Swtich to stroe from Context to Zustand',
     timestamp: 'Jan 2025',
   },
   {
@@ -30,48 +30,40 @@ const values = [
 export default function AboutPage() {
   return (
     <main className="max-w-7xl mx-auto sm:px-6 lg:px-12 py-4">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Hi</h1>
-        <p>Hope you&apos;re having a good one 🔥 My name is Mettihew.</p>
-        <p>I code with React, Next.js, MongoDB, TypeScript — and friends. Building fast stuff for the web. 😉</p>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-16 mb-20">
+
+      <div className="grid md:grid-cols-2 gap-16 mb-8">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">My Journey</h2>
-          <div className="space-y-4 text-gray-600">
-            <p>
-              I started in 2022 with a small project. Step by step, I picked up HTML, CSS, JavaScript, React, Node.js,
-              Express, MongoDB, Next.js, TypeScript, Redux, Zustand — you name it.
-            </p>
-            <p>
-              My site <code>eesy.ir</code> is built with Next.js, TypeScript, and MongoDB. It&apos;s a modern version of my original
-              app, which I first built using React and Node.js. (GitHub link coming soon!)
-            </p>
-            <p>
-              I focus on quality over quantity — and I enjoy building real things that people actually use.
-            </p>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Contact</h2>
+          <div className="grid space-y-2 text-gray-600">
+            <p>Mahdi Keramati</p>
+            <div className='flex gap-4'>
+            <a href="#" className="text-blue-600 hover:underline">Email</a>
+            <a href="#" className="text-blue-600 hover:underline">GitHub</a>
+            <a href="#" className="text-blue-600 hover:underline">LinkedIn</a>
+            <a href="#" className="text-blue-600 hover:underline">0921</a>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-16 mb-20">
+
+      <div className="grid md:grid-cols-2 gap-16 mb-10">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Contact</h2>
-          <div className="grid space-y-4 text-gray-600">
-            <p>You can reach out to me here:</p>
-            <a href="#" className="text-blue-600 hover:underline">GitHub (coming soon)</a>
-            <a href="#" className="text-blue-600 hover:underline">Email (coming soon)</a>
-            <a href="#" className="text-blue-600 hover:underline">LinkedIn (coming soon)</a>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Languages</h2>
+          <div className="space-y-1 text-gray-600">
+            <p className='text-red-800'>Next.js, TypeScript</p>
+             <p> React, Node.js, MongoDB, Express </p>
+             <p> HTML, CSS, JavaScript, Redux, Zustand</p>
           </div>
         </div>
       </div>
 
       <div>
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">Updates</h2>
-        <div className="grid sm:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-3 gap-2">
           {values.map((value) => (
-            <div key={value.title} className="text-center bg-white rounded-lg shadow-sm p-4">
+            <div key={value.title} className="text-center bg-white rounded-lg shadow-sm p-1">
               <div className="text-2xl">{value.emoji}</div>
               <h3 className="text-xl font-medium mb-1">{value.title}</h3>
               <p className="text-gray-600 text-sm">{value.description}</p>
