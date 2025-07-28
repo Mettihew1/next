@@ -1,19 +1,56 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, Search } from 'lucide-react';
-import { useRouter } from 'next/navigation'; // Updated import
+import { useRouter } from 'next/navigation';
+import { useCartStore } from '@/store/cartStore';
+
+interface Suggestion {
+  name: string;
+  slug: string;
+  _id: string;
+}
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
+  const cart = useCartStore((state) => state.cart);
+const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+
+  // Debounced fetch
+  useEffect(() => {
+    const delayDebounce = setTimeout(async () => {
+      if (searchQuery.trim().length >= 2) {
+        const res = await fetch(`/api/products/suggestions?query=${searchQuery}`);
+        const data = await res.json();
+        setSuggestions(data);
+        setShowDropdown(true);
+      } else {
+        setSuggestions([]);
+        setShowDropdown(false);
+      }
+    }, 250);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchQuery]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setShowDropdown(false);
     }
+  };
+
+  const handleSuggestionClick = (slug: string, id: string) => {
+    router.push(`/products/${slug}/${id}`);
+    setSearchQuery('');
+    setShowDropdown(false);
   };
 
   return (
@@ -27,7 +64,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Search Form */}
+          {/* Search Box */}
           <div className="relative flex-1 max-w-md mx-4">
             <form onSubmit={handleSearch}>
               <input 
@@ -42,11 +79,26 @@ export default function Header() {
                 <option>All</option>
               </select>
             </form>
+
+            {/* 🔍 Autocomplete Dropdown */}
+            {showDropdown && suggestions.length > 0 && (
+              <ul className="absolute z-20 bg-white border border-gray-200 w-full mt-1 rounded shadow">
+                {suggestions.map((s) => (
+                  <li
+                    key={s._id}
+                    onClick={() => handleSuggestionClick(s.slug, s._id)}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                  >
+                    {s.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {['/', '/about', '/products', '/contact', '/cart'].map((path) => (
+          {/* <div className="hidden md:flex space-x-8">
+            {['/', '/about', '/products', '/cart'].map((path) => (
               <Link 
                 key={path} 
                 href={path} 
@@ -55,7 +107,27 @@ export default function Header() {
                 {path === '/' ? 'Home' : path.slice(1)}
               </Link>
             ))}
+          </div> */}
+
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-8 items-center">
+            {['/', '/about', '/products', '/cart'].map((path) => (
+              <Link 
+                key={path} 
+                href={path} 
+                className="text-gray-900 hover:text-blue-600 capitalize relative"
+              >
+                {path === '/' ? 'Home' : path.slice(1)}
+                {path === '/cart' && cartCount > 0 && (
+                  <span className="absolute -top-2 -right-3 bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            ))}
           </div>
+
 
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -67,8 +139,8 @@ export default function Header() {
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden bg-white p-4 flex  gap-4 border-t">
-            {['/', '/about', '/products', '/contact', '/cart'].map((path) => (
+          <div className="md:hidden bg-white p-4 flex gap-4 border-t">
+            {['/', '/about', '/products', '/cart'].map((path) => (
               <Link 
                 key={path} 
                 href={path} 

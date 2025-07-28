@@ -1,14 +1,7 @@
-// export default function ProductPage(){
-//   return(
-//     <div>
-//       test
-//     </div>
-//   )
-// }
 
-// src/app/product/[id]/page.tsx
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import ProductClient from '@/components/ProductClient';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -40,8 +33,9 @@ async function getProduct(id: string): Promise<Product | null> {
   return res.json();
 }
 
-
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+// export default async function ProductPage({ params }: { params: { id: string } })
+
   const { id } = await params;
 
   
@@ -158,14 +152,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             </div>
           </div>
 
-          <div className="flex gap-4">
-            <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
-              Add to Cart
-            </button>
-            <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors">
-              Add to Wishlist
-            </button>
-          </div>
+
+<ProductClient productId={product._id} />
         </div>
       </div>
 

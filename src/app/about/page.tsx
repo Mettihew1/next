@@ -47,19 +47,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-
-      <div className="grid md:grid-cols-2 gap-16 mb-10">
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Languages</h2>
-          <div className="space-y-1 text-gray-600">
-            <p className='text-red-800'>Next.js, TypeScript</p>
-             <p> React, Node.js, MongoDB, Express </p>
-             <p> HTML, CSS, JavaScript, Redux, Zustand</p>
-          </div>
-        </div>
-      </div>
-
-      <div>
+         <div>
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">Updates</h2>
         <div className="grid sm:grid-cols-3 gap-2">
           {values.map((value) => (
@@ -72,6 +60,48 @@ export default function AboutPage() {
           ))}
         </div>
       </div>
+
+
+      <div className="grid md:grid-cols-2 gap-16 mb-10">
+        {/* <div>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Languages</h2>
+          <div className="space-y-1 text-gray-600">
+            <p className='text-red-800'>Next.js, TypeScript</p>
+             <p> React, Node.js, MongoDB, Express </p>
+             <p> HTML, CSS, JavaScript, Redux, Zustand</p>
+          </div>
+        </div> */}
+
+
+<p>
+  🛠️ <strong>Tech Stack</strong>
+  <br /><br />
+  <strong>Frontend:</strong>
+  <br />
+  HTML, CSS, JavaScript
+  <br /><br />
+  <strong>Frameworks & Libraries:</strong>
+  <br />
+  React, Next.js, Zustand, Redux
+  <br /><br />
+  <strong>Backend:</strong>
+  <br />
+  Node.js, Express
+  <br /><br />
+  <strong>Database:</strong>
+  <br />
+  MongoDB
+  <br /><br />
+  <strong>Other Tools & Skills:</strong>
+  <br />
+  TypeScript, REST APIs, Responsive Design, Git, Zustand (state management)
+</p>
+
+
+
+      </div>
+
+   
     </main>
   );
 }

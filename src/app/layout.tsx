@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className="bg-gray-100 text-gray-900">
         <Header />
         <main className="max-w-2xl mx-auto p-6">{children}</main>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
