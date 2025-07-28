@@ -96,23 +96,10 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
             )}
           </div>
 
-          {/* Desktop Navigation */}
-          {/* <div className="hidden md:flex space-x-8">
-            {['/', '/about', '/products', '/cart'].map((path) => (
-              <Link 
-                key={path} 
-                href={path} 
-                className="text-gray-900 hover:text-blue-600 capitalize"
-              >
-                {path === '/' ? 'Home' : path.slice(1)}
-              </Link>
-            ))}
-          </div> */}
-
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8 items-center">
-            {['/', '/about', '/products', '/cart'].map((path) => (
+            {['/', '/products', '/about', '/login', '/cart'].map((path) => (
               <Link 
                 key={path} 
                 href={path} 
@@ -140,7 +127,7 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
         {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden bg-white p-4 flex gap-4 border-t">
-            {['/', '/about', '/products', '/cart'].map((path) => (
+            {['/', '/products', '/about', '/login',  '/cart'].map((path) => (
               <Link 
                 key={path} 
                 href={path} 
