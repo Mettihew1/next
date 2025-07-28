@@ -58,36 +58,37 @@ useEffect(() => {
   const shipping = 5.99;
   const total = subtotal + tax + shipping;
 
-
- console.log("🧪 products:", products.map(p => ({ name: p.name, images: p.images })));
+ console.log("🧪 products:", products.length);
 
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8">Your Shopping Cart</h1>
-
       {cart.length === 0 ? (
         <div className="text-center py-16">
           <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
+
+              <p className='text-red-900 text-[100px]'>see me?</p>
+              {products.length !== 0 &&
           <Link
             href="/products"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
-          >
-            Continue Shopping
-          </Link>
+            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"> Continue Shopping
+            </Link>
+              }
         </div>
       ) : (
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-8">
-            <ul className="divide-y divide-gray-200">
+            <div className="divide-y divide-gray-200">
+              {products.length === 0 &&
+              <p className='text-green-900 text-[100px]'>loading image?</p>}
               {cart.map((item) => {
                 const product = getProduct(item.productId);
                 if (!product) return null;
-
                 return (
                   <li key={item.productId} className="py-6">
                     <div className="flex gap-4 items-center">
-                      <div className="w-24 h-24 rounded-md overflow-hidden bg-gray-200">
+                      <div className="w-24 h-24 rounded-md overflow-hidde bg-gray-200">
                         <Image
                           src={product.images[0]?.url || '/favi.ico'}
                           alt={product.images[0]?.alt || product.name}
@@ -108,11 +109,11 @@ useEffect(() => {
                   </li>
                 );
               })}
-            </ul>
+            </div>
           </div>
 
           <div className="lg:col-span-4 mt-8 lg:mt-0">
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+  <div className="bg-gray-50 p-6 rounded-2xl shadow-lg w-full min-w-[320px]">
               <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">

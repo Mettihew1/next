@@ -3,6 +3,7 @@ import Product from '@/models/Product';
 import Image from 'next/image';
 import Link from 'next/link';
 
+
 interface SearchParams {
   searchParams?: {
     q?: string;
@@ -10,6 +11,17 @@ interface SearchParams {
     min?: string;
     max?: string;
   };
+}
+
+interface ProductType {
+  _id: string;
+  name: string;
+  brand: string;
+  price: number;
+  images: {
+    url: string;
+    alt?: string;
+  }[];
 }
 
 export default async function SearchPage({ searchParams }: SearchParams) {
@@ -20,17 +32,26 @@ export default async function SearchPage({ searchParams }: SearchParams) {
   const min = Number(searchParams?.min || 0);
   const max = Number(searchParams?.max || Infinity);
 
-  const filter: any = {
-    isActive: true,
-    name: { $regex: query, $options: 'i' }
-  };
+  interface ProductFilter {
+    isActive: boolean;
+    name: { $regex: string; $options: string };
+    brand?: string;
+    price?: {$gte: number; $lte: number};
+  }
+
+
+  const filter: ProductFilter = {
+  isActive: true,
+  name: { $regex: query, $options: 'i' },
+};
+
 
   if (brand) filter.brand = brand;
   if (!isNaN(min) && !isNaN(max)) {
     filter.price = { $gte: min, $lte: max };
   }
 
-  const products = await Product.find(filter).lean();
+  const products = (await Product.find(filter).lean()) as unknown as ProductType[];
 
   const uniqueBrands = await Product.distinct('brand', { isActive: true });
 
@@ -77,7 +98,7 @@ export default async function SearchPage({ searchParams }: SearchParams) {
         {products.length === 0 && (
           <div className="col-span-full text-gray-500 text-center">No products found</div>
         )}
-        {products.map((product: any) => (
+        {products.map((product: ProductType) => (
           <div key={product._id} className="border rounded shadow hover:shadow-lg transition">
           <Link href={`/product/${product._id}`}>
             <Image
@@ -85,7 +106,7 @@ export default async function SearchPage({ searchParams }: SearchParams) {
               alt={product.images[0]?.alt || product.name}
               width={300}
               height={200}
-              className="object-cover w-full h-48 rounded-t"
+              // className="object-cover w-full h-48 rounded-t"
               />
           </Link>
             <div className="p-4 space-y-1">
