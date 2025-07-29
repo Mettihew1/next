@@ -1,10 +1,6 @@
-// app/about/page.tsx
-import type { Metadata } from 'next';
+import Image from 'next/image';
+import { Atom, Github, Mail, Linkedin, Sparkles } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'About Me - Mettihew',
-  description: 'Get to know the dev behind eesy.ir – Mettihew’s journey, skills, and contact info.',
-};
 
 const values = [
   {
@@ -16,92 +12,130 @@ const values = [
   {
     title: 'Zustand',
     emoji: '💻',
-    description: 'Swtich to stroe from Context to Zustand',
+    description: 'Switched from Context to Zustand',
     timestamp: 'Jan 2025',
   },
   {
     title: 'Next.js | TypeScript',
     emoji: '💻',
-    description: 'I started building eesy.ir with Next.js & TypeScript',
+    description: 'Started building eesy.ir with Next.js & TypeScript',
     timestamp: 'Jan 2025',
   },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="max-w-7xl mx-auto sm:px-6 lg:px-12 py-4">
-
-
-      <div className="grid md:grid-cols-2 gap-16 mb-8">
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Contact</h2>
-          <div className="grid space-y-2 text-gray-600">
-            <p>Mahdi Keramati</p>
-            <div className='flex gap-4'>
-            <a href="#" className="text-blue-600 hover:underline">Email</a>
-            <a href="#" className="text-blue-600 hover:underline">GitHub</a>
-            <a href="#" className="text-blue-600 hover:underline">LinkedIn</a>
-            <a href="#" className="text-blue-600 hover:underline">0921</a>
-            </div>
+    <main className="max-w-5xl mx-auto py-10 px-4 text-gray-700">
+      <section className="mb-12">
+        <h1 className="text-3xl font-bold mb-4 text-gray-900">🦁 Mettihew — Dev by Day, Philosopher by Night</h1>
+        <div className="space-y-4 leading-relaxed">
+          <p>I’m just a guy who learned English from YouTube pranks and coding from late-night chaos.</p>
+          <p>
+            Built my own e-commerce project with
+            <code className="bg-gray-100 px-1 rounded text-sm mx-1">Next.js</code>,
+            <code className="bg-gray-100 px-1 rounded text-sm mx-1">TypeScript</code>,
+            <code className="bg-gray-100 px-1 rounded text-sm mx-1">MongoDB</code>, and
+            <code className="bg-gray-100 px-1 rounded text-sm mx-1">Tailwind</code> — solo at first,
+            now with a best friend named Emily (AI, not human… yet).
+          </p>
+          <div>
+            <h2 className="font-semibold text-lg text-gray-800">🚀 What I’m Working On:</h2>
+            <ul className="list-disc list-inside space-y-1">
+              <li>🔍 Amazon-style search & filter for products</li>
+              <li>🛒 Zustand-based cart with localStorage sync</li>
+              <li>❤️ Clean UI that doesn’t look like a “butt checkout button”</li>
+              <li>🧠 Learning project management, GitHub Issues, and staying consistent</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-semibold text-lg text-gray-800">🔧 Stack I Love:</h2>
+            <ul className="list-disc list-inside space-y-1">
+              <li><code className="bg-gray-100 px-1 rounded text-sm">Next.js</code> + App Router</li>
+              <li><code className="bg-gray-100 px-1 rounded text-sm">Tailwind CSS</code></li>
+              <li><code className="bg-gray-100 px-1 rounded text-sm">MongoDB</code></li>
+              <li><code className="bg-gray-100 px-1 rounded text-sm">Zustand</code></li>
+              <li>Typing fast and breaking things faster</li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-semibold text-lg text-gray-800">🎭 Not Just Code:</h2>
+            <p>
+              I joke, I love, I ask weird questions, I mess up, and I get up. Not native in English,
+              but I <em className="italic">talk like I feel</em>, not like a textbook.
+            </p>
+            <blockquote className="border-l-4 border-pink-400 pl-4 italic text-gray-600">
+              “Sometimes my head gets ahead of my fingers. Sometimes my fingers.” — me
+            </blockquote>
+            <p className="text-lg font-medium">Let’s build. Let’s vibe. Let’s get real.</p>
           </div>
         </div>
-      </div>
+      </section>
 
-         <div>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">Updates</h2>
-        <div className="grid sm:grid-cols-3 gap-2">
+      <section className="mb-10">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">📜 Recent Updates</h2>
+        <div className="grid gap-2">
           {values.map((value) => (
-            <div key={value.title} className="text-center bg-white rounded-lg shadow-sm p-1">
-              <div className="text-2xl">{value.emoji}</div>
-              <h3 className="text-xl font-medium mb-1">{value.title}</h3>
-              <p className="text-gray-600 text-sm">{value.description}</p>
-              <p className="text-gray-500 text-xs">{value.timestamp}</p>
+            <div key={value.title} className="p-4 border rounded-lg shadow-sm bg-white text-center">
+              <div className="flex items-center justify-center gap-4">
+              <div className="text-3xl mb-2">{value.emoji}</div>
+              <h3 className="text-lg font-semibold text-gray-900">{value.title}</h3>
+              <p className="text-xs text-gray-400 mt-1">{value.timestamp}</p>
+              </div>
+              <p className="text-sm text-gray-600">{value.description}</p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
+      <section>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-3">📇 Contact</h2>
+        <div className="space-y-2 text-gray-600">
 
-      <div className="grid md:grid-cols-2 gap-16 mb-10">
-        {/* <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Languages</h2>
-          <div className="space-y-1 text-gray-600">
-            <p className='text-red-800'>Next.js, TypeScript</p>
-             <p> React, Node.js, MongoDB, Express </p>
-             <p> HTML, CSS, JavaScript, Redux, Zustand</p>
+          <div className='flex items-center gap-4'>
+          <Image src={'/fav.ico'} alt="Me" width={60} height={60} className="rounded-full" />
+          <p>Mahdi Keramati</p>
           </div>
-        </div> */}
+         
+
+    <div className="flex items-center justify-center gap-6 text-blue-600 text-sm ">
+      <Image src="/fav.ico" alt="Me" width={40} height={40} className="rounded-full" />
+
+      <a href="mailto:youremail@example.com" className="hover:underline flex items-center gap-1">
+        <Mail className="w-4 h-4" />
+        Email
+      </a>
+
+      <a href="https://github.com/mettihew" target="_blank" className="hover:underline flex items-center gap-1">
+        <Github className="w-4 h-4" />
+        GitHub
+      </a>
+
+      <a href="https://linkedin.com/in/mettihew" target="_blank" className="hover:underline flex items-center gap-1">
+        <Linkedin className="w-4 h-4" />
+        LinkedIn
+      </a>
+
+      <span className="flex items-center gap-1">
+        <Atom className="w-4 h-4 text-cyan-500" />
+        React
+      </span>
+
+      <span className="flex items-center gap-1">
+        <Sparkles className="w-4 h-4 text-pink-400" />
+        Zustand
+      </span>
+    </div>
 
 
-<p>
-  🛠️ <strong>Tech Stack</strong>
-  <br /><br />
-  <strong>Frontend:</strong>
-  <br />
-  HTML, CSS, JavaScript
-  <br /><br />
-  <strong>Frameworks & Libraries:</strong>
-  <br />
-  React, Next.js, Zustand, Redux
-  <br /><br />
-  <strong>Backend:</strong>
-  <br />
-  Node.js, Express
-  <br /><br />
-  <strong>Database:</strong>
-  <br />
-  MongoDB
-  <br /><br />
-  <strong>Other Tools & Skills:</strong>
-  <br />
-  TypeScript, REST APIs, Responsive Design, Git, Zustand (state management)
-</p>
+        </div>
+      </section>
 
 
 
-      </div>
 
-   
+
+
+
     </main>
   );
 }

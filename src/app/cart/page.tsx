@@ -1,6 +1,8 @@
 
 'use client';
 
+import LoadingDots from '@/components/LoadingDots';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -68,7 +70,7 @@ useEffect(() => {
         <div className="text-center py-16">
           <h2 className="text-xl font-medium mb-4">Your cart is empty</h2>
 
-              <p className='text-red-900 text-[100px]'>see me?</p>
+                    <LoadingDots />
               {products.length !== 0 &&
           <Link
             href="/products"
@@ -81,7 +83,9 @@ useEffect(() => {
           <div className="lg:col-span-8">
             <div className="divide-y divide-gray-200">
               {products.length === 0 &&
-              <p className='text-green-900 text-[100px]'>loading image?</p>}
+                    <LoadingDots />
+      }
+
               {cart.map((item) => {
                 const product = getProduct(item.productId);
                 if (!product) return null;

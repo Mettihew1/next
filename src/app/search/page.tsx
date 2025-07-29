@@ -3,16 +3,6 @@ import Product from '@/models/Product';
 import Image from 'next/image';
 import Link from 'next/link';
 
-
-interface SearchParams {
-  searchParams?: {
-    q?: string;
-    brand?: string;
-    min?: string;
-    max?: string;
-  };
-}
-
 interface ProductType {
   _id: string;
   name: string;
@@ -24,35 +14,35 @@ interface ProductType {
   }[];
 }
 
-export default async function SearchPage({ searchParams }: SearchParams) {
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams?: Record<string, string | string[] | undefined>;
+}) {
   await dbConnect();
 
-  const query = searchParams?.q || '';
-  const brand = searchParams?.brand || '';
-  const min = Number(searchParams?.min || 0);
-  const max = Number(searchParams?.max || Infinity);
+  const query = typeof searchParams?.q === 'string' ? searchParams.q : '';
+  const brandParam = searchParams?.brand;
+  const brandList =
+    typeof brandParam === 'string' ? brandParam.split(',').map((b) => b.trim()) : [];
 
-  interface ProductFilter {
-    isActive: boolean;
-    name: { $regex: string; $options: string };
-    brand?: string;
-    price?: {$gte: number; $lte: number};
+  const min = parseFloat(typeof searchParams?.min === 'string' ? searchParams.min : '0');
+  const max = parseFloat(typeof searchParams?.max === 'string' ? searchParams.max : `${Infinity}`);
+
+  const filter: any = {
+    isActive: true,
+    name: { $regex: query, $options: 'i' },
+  };
+
+  if (brandList.length > 0) {
+    filter.brand = { $in: brandList };
   }
 
-
-  const filter: ProductFilter = {
-  isActive: true,
-  name: { $regex: query, $options: 'i' },
-};
-
-
-  if (brand) filter.brand = brand;
   if (!isNaN(min) && !isNaN(max)) {
     filter.price = { $gte: min, $lte: max };
   }
 
-  const products = (await Product.find(filter).lean()) as unknown as ProductType[];
-
+  const products = (await Product.find(filter).lean()) as ProductType[];
   const uniqueBrands = await Product.distinct('brand', { isActive: true });
 
   return (
@@ -69,14 +59,19 @@ export default async function SearchPage({ searchParams }: SearchParams) {
 
           <div>
             <label className="font-semibold block mb-1">Brand</label>
-            <select name="brand" defaultValue={brand} className="w-full border px-2 py-1 rounded">
-              <option value="">All</option>
+            <select
+              name="brand"
+              defaultValue={brandList.join(',')}
+              multiple
+              className="w-full border px-2 py-1 rounded h-32"
+            >
               {uniqueBrands.map((b) => (
                 <option key={b} value={b}>
                   {b}
                 </option>
               ))}
             </select>
+            <p className="text-xs text-gray-500">Hold Ctrl (or ⌘) to select multiple</p>
           </div>
 
           <div>
@@ -98,17 +93,16 @@ export default async function SearchPage({ searchParams }: SearchParams) {
         {products.length === 0 && (
           <div className="col-span-full text-gray-500 text-center">No products found</div>
         )}
-        {products.map((product: ProductType) => (
+        {products.map((product) => (
           <div key={product._id} className="border rounded shadow hover:shadow-lg transition">
-          <Link href={`/product/${product._id}`}>
-            <Image
-              src={product.images[0]?.url || '/placeholder.jpg'}
-              alt={product.images[0]?.alt || product.name}
-              width={300}
-              height={200}
-              // className="object-cover w-full h-48 rounded-t"
+            <Link href={`/product/${product._id}`}>
+              <Image
+                src={product.images[0]?.url || '/placeholder.jpg'}
+                alt={product.images[0]?.alt || product.name}
+                width={300}
+                height={200}
               />
-          </Link>
+            </Link>
             <div className="p-4 space-y-1">
               <h3 className="font-semibold">{product.name}</h3>
               <p className="text-sm text-gray-500">{product.brand}</p>
