@@ -1,26 +1,29 @@
 
-
-
-
-
-// export function GET() {
-  // return new Response('Not implemented yet', { status: 501 });
-// }
-
-
-
-
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
 
-export async function GET(request, { params }) {
+interface Params {
+  params: {
+    slug: string;
+    id: string;
+  };
+}
+
+
+export async function GET(
+  request: Request,
+  { params }: Params
+) {
+  const { slug, id } = await params;
+
   await dbConnect();
 
-  const { id } = await params;
+  console.log('can you -----------------------------', slug , id);
+  
 
-  // 🛑 If it's not a valid MongoDB ObjectId, don't even try
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return NextResponse.json(
       { error: 'Invalid product ID' },
@@ -53,3 +56,7 @@ export async function GET(request, { params }) {
     );
   }
 }
+
+
+
+

@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ProductClient from '@/components/ProductClient';
+import ReviewForm from '@/components/ReviewForm';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
@@ -23,8 +24,8 @@ type Product = {
   sold: number;
 };
 
-async function getProduct(id: string): Promise<Product | null> {
-  const res = await fetch(`${baseUrl}/api/products/${id}`, {
+async function getProduct(slug: string, id: string ): Promise<Product | null> {
+  const res = await fetch(`${baseUrl}/api/products/${slug}/${id}`, {
     cache: 'no-store',
     next: { tags: [`product-${id}`] },
   });
@@ -33,17 +34,16 @@ async function getProduct(id: string): Promise<Product | null> {
   return res.json();
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-// export default async function ProductPage({ params }: { params: { id: string } })
-
-  const { id } = await params;
+export default async function ProductPage({ params }: { params: Promise<{ slug: string, id: string }> }) {
+ 
+  const { slug, id } = await params;
 
   
   if (!id || typeof id !== 'string') {
     return notFound();
   }
 
-  const product = await getProduct(id);
+  const product = await getProduct(slug, id);
 
   if (!product) {
     return notFound();
@@ -160,7 +160,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
       {/* Reviews Section */}
       <section className="mt-16">
         <h2 className="text-2xl font-bold mb-6">Customer Reviews</h2>
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-yellow rounded-lg shadow-md p-6">
           <div className="flex items-center mb-6">
             <div className="text-4xl font-bold mr-4">{product.rating.toFixed(1)}</div>
             <div>
@@ -172,6 +172,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           </div>
           <div className="text-center py-8">
             <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+                  <ReviewForm productId={product._id}/>
             <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors">
               Write a Review
             </button>

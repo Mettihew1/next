@@ -12,6 +12,7 @@ interface ProductType {
     url: string;
     alt?: string;
   }[];
+  slug: string;
 }
 
 export default async function SearchPage({
@@ -29,7 +30,7 @@ export default async function SearchPage({
   const min = parseFloat(typeof searchParams?.min === 'string' ? searchParams.min : '0');
   const max = parseFloat(typeof searchParams?.max === 'string' ? searchParams.max : `${Infinity}`);
 
-  const filter: any = {
+  const filter: Record<string, unknown> = {
     isActive: true,
     name: { $regex: query, $options: 'i' },
   };
@@ -57,22 +58,25 @@ export default async function SearchPage({
             className="w-full px-3 py-2 border rounded"
           />
 
-          <div>
-            <label className="font-semibold block mb-1">Brand</label>
-            <select
-              name="brand"
-              defaultValue={brandList.join(',')}
-              multiple
-              className="w-full border px-2 py-1 rounded h-32"
-            >
-              {uniqueBrands.map((b) => (
-                <option key={b} value={b}>
-                  {b}
-                </option>
-              ))}
-            </select>
-            <p className="text-xs text-gray-500">Hold Ctrl (or ⌘) to select multiple</p>
-          </div>
+          
+<div>
+  <label className="font-semibold block mb-1">Brand</label>
+  <select
+    name="brand"
+    defaultValue={brandList}
+    multiple
+    className="w-full border px-2 py-1 rounded h-32"
+  >
+    {uniqueBrands.map((b) => (
+      <option key={b} value={b}>
+        {b}
+      </option>
+    ))}
+  </select>
+  <p className="text-xs text-gray-500">Hold Ctrl (or ⌘) to select multiple</p>
+</div>
+
+
 
           <div>
             <label className="font-semibold block mb-1">Price Range</label>
@@ -95,7 +99,7 @@ export default async function SearchPage({
         )}
         {products.map((product) => (
           <div key={product._id} className="border rounded shadow hover:shadow-lg transition">
-            <Link href={`/product/${product._id}`}>
+            <Link href={`/products/${product.slug}/${product._id}`}>
               <Image
                 src={product.images[0]?.url || '/placeholder.jpg'}
                 alt={product.images[0]?.alt || product.name}

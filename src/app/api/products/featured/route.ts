@@ -1,12 +1,15 @@
-// route.ts for /api/products
 import { NextResponse } from 'next/server';
-import Product from '@/models/Product'
 import dbConnect from '@/lib/mongodb';
+import Product from '@/models/Product';
 
-
-// route.ts for /api/products/featured
 export async function GET() {
   await dbConnect();
-  const products = await Product.find({ featured: true });
+
+  const products = await Product.find({ featured: true }).lean();
+
+  if (!products) {
+    return new NextResponse('No featured products found', { status: 404 });
+  }
+
   return NextResponse.json(products);
 }

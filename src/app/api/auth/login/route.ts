@@ -1,16 +1,28 @@
 import { NextResponse } from "next/server";
-import dbConnect from "@/lib/mongodb";
+import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { comparePasswords } from "@/lib/hash";
 
 export async function POST(req: Request) {
-  const { email, password } = await req.json();
-  await dbConnect();
+  
+  try {
+    const { email, password } = await req.json();
+    await connectDB();
+    
+    const user = await User.findOne({ email });
 
-  const user = await User.findOne({ email });
-  if (!user || !(await comparePasswords(password, user.password))) {
-    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    console.log(user, email, password);
+    
+
+    if (!user || !(await comparePasswords(password, user.password))) {
+      return NextResponse.json(
+        { error: "Invalid credentials" },
+        { status: 401 }
+      );
+    }
+
+    return NextResponse.json({ message: "Login success", userId: user._id.toString() });
+  } catch (err) {
+    return NextResponse.json({ error: err }, { status: 500 });
   }
-
-  return NextResponse.json({ message: "Login success", userId: user._id });
 }

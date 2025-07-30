@@ -1,10 +1,14 @@
-// lib/hash.ts
 import bcrypt from "bcrypt";
 
-export async function hashPassword(password: string) {
-  return await bcrypt.hash(password, 10);
+export async function hashPassword(password: string): Promise<string> {
+  const saltRounds = 14;
+  const salt = await bcrypt.genSalt(saltRounds);
+  return bcrypt.hash(password, salt);
 }
 
-export async function comparePasswords(plain: string, hashed: string) {
-  return await bcrypt.compare(plain, hashed);
+export async function comparePasswords(
+  candidatePassword: string,
+  hashedPassword: string
+): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, hashedPassword);
 }

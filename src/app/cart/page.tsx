@@ -2,7 +2,6 @@
 'use client';
 
 import LoadingDots from '@/components/LoadingDots';
-
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -93,6 +92,7 @@ useEffect(() => {
                   <li key={item.productId} className="py-6">
                     <div className="flex gap-4 items-center">
                       <div className="w-24 h-24 rounded-md overflow-hidde bg-gray-200">
+                        <Link href={`/products/${product.slug}/${product._id}`}>
                         <Image
                           src={product.images[0]?.url || '/favi.ico'}
                           alt={product.images[0]?.alt || product.name}
@@ -100,6 +100,7 @@ useEffect(() => {
                           height={96}
                           className="object-cover"
                         />
+                        </Link>
                       </div>
                       <div className="flex-1">
                         <h3 className="font-medium">{product.name}</h3>
