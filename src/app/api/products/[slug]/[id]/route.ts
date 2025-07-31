@@ -5,9 +5,9 @@ import mongoose from 'mongoose';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Record<string, string> }
+  context: { params: { slug: string; id: string } }
 ) {
-  const { id } = params;
+  const { id } = context.params;
 
   await dbConnect();
 
