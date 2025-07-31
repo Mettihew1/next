@@ -1,21 +1,13 @@
-
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
 
-// interface Params {
-  // params: {
-    // slug: string;
-    // id: string;
-  // };
-// }
-
 export async function GET(
-  request: Request,
-  { params }: { params: { slug: string; id: string } }
+  req: NextRequest,
+  { params }: { params: Record<string, string> }
 ) {
-  const { id } = await params; // ✅ THIS FIXES THE WARNING
+  const { id } = params;
 
   await dbConnect();
 
