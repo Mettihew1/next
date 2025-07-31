@@ -15,20 +15,27 @@ interface ProductType {
   slug: string;
 }
 
+
+
+
+
+
+
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  const params = await searchParams;
+
   await dbConnect();
 
-  const query = typeof searchParams?.q === 'string' ? searchParams.q : '';
-  const brandParam = searchParams?.brand;
-  const brandList =
-    typeof brandParam === 'string' ? brandParam.split(',').map((b) => b.trim()) : [];
+  const query = typeof params.q === 'string' ? params.q : '';
+  const brandParam = params.brand;
+  const brandList = typeof brandParam === 'string' ? brandParam.split(',').map(b => b.trim()) : [];
 
-  const min = parseFloat(typeof searchParams?.min === 'string' ? searchParams.min : '0');
-  const max = parseFloat(typeof searchParams?.max === 'string' ? searchParams.max : `${Infinity}`);
+  const min = parseFloat(typeof params.min === 'string' ? params.min : '0');
+  const max = parseFloat(typeof params.max === 'string' ? params.max : `${Infinity}`);
 
   const filter: Record<string, unknown> = {
     isActive: true,
@@ -43,8 +50,14 @@ export default async function SearchPage({
     filter.price = { $gte: min, $lte: max };
   }
 
-  const products = (await Product.find(filter).lean()) as ProductType[];
+  const products = (await Product.find(filter).lean<ProductType[]>()).map(p => ({
+    ...p,
+    _id: p._id.toString(),
+  }));
+
   const uniqueBrands = await Product.distinct('brand', { isActive: true });
+
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -58,25 +71,22 @@ export default async function SearchPage({
             className="w-full px-3 py-2 border rounded"
           />
 
-          
-<div>
-  <label className="font-semibold block mb-1">Brand</label>
-  <select
-    name="brand"
-    defaultValue={brandList}
-    multiple
-    className="w-full border px-2 py-1 rounded h-32"
-  >
-    {uniqueBrands.map((b) => (
-      <option key={b} value={b}>
-        {b}
-      </option>
-    ))}
-  </select>
-  <p className="text-xs text-gray-500">Hold Ctrl (or ⌘) to select multiple</p>
-</div>
-
-
+          <div>
+            <label className="font-semibold block mb-1">Brand</label>
+            <select
+              name="brand"
+              defaultValue={brandList}
+              multiple
+              className="w-full border px-2 py-1 rounded h-32"
+            >
+              {uniqueBrands.map((b) => (
+                <option key={b} value={b}>
+                  {b}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500">Hold Ctrl (or ⌘) to select multiple</p>
+          </div>
 
           <div>
             <label className="font-semibold block mb-1">Price Range</label>

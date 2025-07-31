@@ -3,11 +3,10 @@ import dbConnect from '@/lib/mongodb';
 import Product from '@/models/Product';
 import mongoose from 'mongoose';
 
-export async function GET(
-  req: NextRequest,
-  context: { params: { slug: string; id: string } }
-) {
-  const { id } = context.params;
+export async function GET(req: NextRequest, context: unknown) {
+  // ⛑️ safely cast to expected shape
+  const { params } = context as { params: { slug: string; id: string } };
+  const { id } = params;
 
   await dbConnect();
 

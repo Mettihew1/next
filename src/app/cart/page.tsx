@@ -9,6 +9,7 @@ import { useCartStore } from '@/store/cartStore';
 
 type Product = {
   _id: string;
+  slug: string;  
   name: string;
   price: number;
   images: { url: string; alt: string }[];
