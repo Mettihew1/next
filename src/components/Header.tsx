@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
+import EbaySearchBar from '@/components/EbaySearchBar';
 
 interface Suggestion {
   name: string;
@@ -75,10 +76,14 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
                 placeholder="Search..."
               />
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <select className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none">
-                <option>All</option>
+            <select className="bg-blue-500 text-red absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none">
+              <option>All</option>
+          <option>Shirts</option>
+          <option>Shoes</option>
               </select>
             </form>
+
+
 
             {/* 🔍 Autocomplete Dropdown */}
             {showDropdown && suggestions.length > 0 && (
@@ -127,7 +132,7 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
         {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden bg-white p-4 flex gap-4 border-t">
-            {['/', '/products', '/about', '/login',  '/cart'].map((path) => (
+            {['/', '/products', '/about', '/login',  '/cart', '/test'].map((path) => (
               <Link 
                 key={path} 
                 href={path} 
@@ -140,6 +145,9 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
           </div>
         )}
       </nav>
+
+<EbaySearchBar />
+
     </header>
   );
 }

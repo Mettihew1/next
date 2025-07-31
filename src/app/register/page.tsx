@@ -22,9 +22,9 @@ export default function RegisterPage() {
 
     if (!res.ok) {
       if (data.errors) {
-        const messages = Object.values(data.errors)
-          .map((err: any) => err.message)
-          .join(", ");
+        const messages = (Object.values(data.errors) as { message: string }[])
+  .map((err) => err.message)
+  .join(", ");
         setError(messages);
       } else {
         setError(data.error?.message || data.message || data.error || "Something went wrong");
