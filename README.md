@@ -27,3 +27,12 @@ A full-stack modern e-commerce web app built with **Next.js App Router**, **Type
 
 ---
 
+
+- 🧠 TypeScript + Next.js
+- 🎨 TailwindCSS
+- 🍃 MongoDB
+- 🔐 NextAuth
+- ☁️ Vercel deployment
+
+
+live on eesy.ir
