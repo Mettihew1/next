@@ -5,13 +5,40 @@ import Link from 'next/link';
 import { Menu, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
-import EbaySearchBar from '@/components/EbaySearchBar';
+// import EbaySearchBar from '@/components/EbaySearchBar';
 
 interface Suggestion {
   name: string;
   slug: string;
   _id: string;
 }
+
+
+
+
+
+// type ProductType = {
+//   _id: string;
+//   name: string;
+//   slug: string;
+//   price: number;
+//   images: { url: string; alt?: string }[];
+// };
+
+
+  // async function getProducts(): Promise<ProductType[]> {
+//   const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+//   const res = await fetch(`${baseUrl}/api/products/featured`, {
+//     method: 'GET',
+//     cache: 'no-store',
+//   });
+
+//   if (!res.ok) throw new Error('Failed to fetch products');
+
+//   return res.json();
+// }
+
+
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,13 +81,23 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
     setShowDropdown(false);
   };
 
+ // let products: ProductType[] = [];
+
+  // try {
+  //   products = await getProducts();
+  // } catch (error) {
+  //   console.error('Fetch error:', error);
+  // }
+
+
+
   return (
     <header className="bg-white shadow-sm top-0 z-10">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900 mx-1">
+            <Link href="/" className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[22px] font-bold text-gray-900">
               Eesy
             </Link>
           </div>
@@ -72,14 +109,15 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
                 type="text" 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-20 py-2 border border-black rounded-full"
+                // sm: from small to up < 
+                className="w-full pl-10 pr-20 py-1 sm:py-2 border border-black rounded-full"
                 placeholder="Search..."
               />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search onClick={handleSearch} className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <select className="bg-blue-500 text-red absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none">
-              <option>All</option>
-          <option>Shirts</option>
-          <option>Shoes</option>
+              <option></option>
+              <option>Shirts</option>
+              <option>Shoes</option>
               </select>
             </form>
 
@@ -146,7 +184,7 @@ const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
         )}
       </nav>
 
-<EbaySearchBar />
+{/* <EbaySearchBar /> */}
 
     </header>
   );

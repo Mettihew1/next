@@ -27,7 +27,8 @@ export default function RegisterPage() {
   .join(", ");
         setError(messages);
       } else {
-        setError(data.error?.message || data.message || data.error || "Something went wrong");
+        // setError(data.error?.message || data.message || data.error || "Something went wrong");
+        setError(JSON.stringify(data.error || "Something went wrong"));
       }
     } else {
       setError("");

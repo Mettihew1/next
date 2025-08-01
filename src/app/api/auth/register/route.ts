@@ -21,6 +21,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ userId: user._id.toString() });
   } catch (err) {
-    return NextResponse.json({ error: err }, { status: 500 });
+    // return NextResponse.json({ error: err }, { status: 500 });
+    console.error(err);
+return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+
   }
 }

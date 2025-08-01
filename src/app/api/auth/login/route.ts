@@ -13,13 +13,9 @@ export async function POST(req: Request) {
 
     console.log(user, email, password);
     
-
-    if (!user || !(await comparePasswords(password, user.password))) {
-      return NextResponse.json(
-        { error: "Invalid credentials" },
-        { status: 401 }
-      );
-    }
+if (!user || !(await comparePasswords(password, user.password))) {
+  return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+}
 
     return NextResponse.json({ message: "Login success", userId: user._id.toString() });
   } catch (err) {
